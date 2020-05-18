@@ -1,0 +1,14 @@
+// Root file 
+// import express  with common js modules 
+const express = require('express');
+
+// Express application
+const app = express(); 
+
+
+app.get('/', (req, res) => {
+  res.send({hi: 'there'});
+})
+
+
+app.listen(5000);
