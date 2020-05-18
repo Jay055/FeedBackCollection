@@ -14,9 +14,7 @@ const app = express();
 passport.use(new GoogleStrategy());
 
 
-//client ID 
 
-//153585239288-3iqqtvun8r8nqps9cqklpqs5r9h38pok.apps.googleusercontent.com
 
 
 // Set port with Environment Variables 
