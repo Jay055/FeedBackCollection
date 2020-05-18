@@ -1,3 +1,4 @@
+
 // Root file 
 // import express  with common js modules 
 const express = require('express');
@@ -19,13 +20,28 @@ passport.use(new GoogleStrategy({
   // Redirect location from google
   callbackURL: '/auth/google/callback'
 },
-  accessToken => {
-    console.log(accessToken)
-  }
+  (accessToken, refreshToken, profile, done) =>{
+    console.log('access token', accessToken);
+    console.log('refresh token', refreshToken);
+    console.log('profile:', profile);
+    }
 ));
 
 
+// Ask User if they grant permission
+// Redirection on Oauth Access with Route Handler 
+// Pass in path and google ('type of Oauth strategy ') as parameters
+// Scope: Access approved to get from google
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
+);
 
+
+// On permisson resolve to the profile 
+app.get('/auth/google/callback', passport.authenticate('google'));
 
 
 
