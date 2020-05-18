@@ -1,14 +1,23 @@
 // Root file 
 // import express  with common js modules 
 const express = require('express');
+// Passport for authentication
+const passport = require('passport');
+// GoogleStrategy for authetication with google
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // Express application
 const app = express(); 
 
-// route handler associated with the get method 
-app.get('/', (req, res) => {
-  res.send({hi: 'there'});
-})
+
+// Use passport GoogleStrategy 
+passport.use(new GoogleStrategy());
+
+
+//client ID 
+
+//153585239288-3iqqtvun8r8nqps9cqklpqs5r9h38pok.apps.googleusercontent.com
+
 
 // Set port with Environment Variables 
 const PORT = process.env.PORT || 5000; 
