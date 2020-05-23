@@ -39,7 +39,10 @@ passport.use(
   clientID: keys.googleClientID,
   clientSecret: keys.googleClientSecret, 
   // Redirect location from google
-  callbackURL: '/auth/google/callback'
+  callbackURL: '/auth/google/callback',
+  // Allow google strategy trust Heroku's proxy (return https and not http)
+  proxy: true
+  
 },
   (accessToken, refreshToken, profile, done) =>{
     // Avoid duplicate registration
