@@ -59,3 +59,34 @@ Since the main goal of using http://localhost:5000/* was to show the redirect er
 11. Copy your Client ID and Client Secret in a safe place so you can use it in your application in a future lecture. (ID and Secret were redacted from the screenshot)
 
 
+
+
+<---------------------------------------------------->
+
+
+Passport Identification Token: 
+- We would use the serialise user function to generate the identifiying piece of info
+- Set-Cookie '    '
+- On client reques passport deserializes the user and accepts the user
+
+USE PASSPORT TO HANDLE COOKIES 
+- npm install --save cookie-session
+- import and initialize cookieSession in index.js file
+
+
+
+EXPRESSCOOKIES : Stores remotely a large amount of data 
+COOKIESESSION: Stores limited amount of data
+
+
+DEV // PRODUCTION KEYS 
+It's not save to keep our keys only in the our computer. 
+We should have production and development keys.
+
+
+CREATE NEW KEYS FOR PRODUCTION 
+- Create google and MongoURI production keys and store in 
+Heroko config vars. 
+
+
+

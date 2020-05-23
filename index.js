@@ -18,7 +18,12 @@ require('./models/User');
 require('./services/passport');
 // The order of the require statement matters in Mongodb, we have to get the data first before using. 
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, {
+    // Pass parameters to avoid depreciation warning
+  useNewUrlParser: true,
+   useUnifiedTopology: true 
+
+})
 
 
 
@@ -27,15 +32,16 @@ mongoose.connect(keys.mongoURI);
 // Express application
 const app = express(); 
 
-//Initialize Cookie Authentication 
+//Initialize Cookie Authentication with 3 middlewares 
+// Middlewares do preprocessing of our requests before they are sent to our route handlles 
 app.use(
   cookieSession({
       //Cookie expiration
     maxAge: 30 * 24 * 60 * 60 * 1000,
       // encrypty cookie
-    keys: [keys.cookieKey]
+    keys: [keys.cookieKey]  
 
-
+        // passport get data from res.session and deserialzies data 
   })
 )
 

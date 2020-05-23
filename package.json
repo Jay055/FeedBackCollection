@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon start"
+    
   },
   "author": "",
   "license": "ISC",
