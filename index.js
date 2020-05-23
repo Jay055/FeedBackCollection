@@ -5,13 +5,18 @@ const express = require('express');
 // passport validation 
 require('./services/passport');
 
+const keys = require('./config/keys');
+const mongoose = require('mongoose');
+
+mongoose.connect(keys.mongoURI);
+
 
 // Express application
 const app = express(); 
 
 // Import AuthRoutes and call it with the app function., returns a function
 require('./routes/authRoutes')(app);
-// We can also use router.get  for this . 
+
 
 
 
