@@ -59,7 +59,7 @@ require('./routes/authRoutes')(app);
 // Set port with Environment Variables 
 const PORT = process.env.PORT || 5000; 
 
-// Node listens to app 5000 
-app.listen(5000);
+// Node listens to PORT (!5000 anymore) 
+app.listen(PORT);
 
 
