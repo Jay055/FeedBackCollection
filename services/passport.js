@@ -33,7 +33,9 @@ passport.deserializeUser((id, done) => {
 
 
 // Use passport GoogleStrategy with Oauth keys 
-passport.use(new GoogleStrategy({
+passport.use(
+  new GoogleStrategy(
+{
   clientID: keys.googleClientID,
   clientSecret: keys.googleClientSecret, 
   // Redirect location from google
@@ -43,23 +45,43 @@ passport.use(new GoogleStrategy({
     // Avoid duplicate registration
     // Whenever we use our data base we are intiating an Async function. 
     User.findOne({ googleId: profile.id })
-    .then((existingUser)=>{
+    .then(existingUser=>{
       if(existingUser){
         // we already have a record with the given profile ID
         // done(error object, userObject)
          done(null, existingUser);
-      } else{
+      } else {
         // No user found with ID, make a new ID 
         new User({ googleId: profile.id})
         .save()
           .then(user => done(null, user));
       }
     })
+
+
+
+
   //  Create a new user with the Model Class. ProfileId is gotten from access token. Create profile after Oauthentication
   //   console.log('profile:', profile);
    
     }
 ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

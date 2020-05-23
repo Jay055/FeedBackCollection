@@ -2,8 +2,6 @@ const passport = require('passport');
 
 
 
-
-
 // Exporting a function 
 module.exports = (app) => {
 
@@ -22,5 +20,11 @@ module.exports = (app) => {
 
     // On permisson resolve to the profile 
     app.get('/auth/google/callback', passport.authenticate('google'));
+
+      // get request to return user 
+      app.get('/api/current_user', (req, res) => {
+        res.send(req.user);
+      })
+
 };
 
