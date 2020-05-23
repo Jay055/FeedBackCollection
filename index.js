@@ -16,7 +16,8 @@ const app = express();
 
 // Import AuthRoutes and call it with the app function., returns a function
 require('./routes/authRoutes')(app);
-
+// Import Model Class User
+require('./models/User');
 
 
 
