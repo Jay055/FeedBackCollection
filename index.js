@@ -4,9 +4,14 @@
 const express = require('express');
 // passport validation 
 
-
 const keys = require('./config/keys');
 const mongoose = require('mongoose');
+
+// Import cookieSession for serializing users 
+const cookieSession = require('cookie-session');
+// Request for passport to use cookie
+const passport = require('passport');
+
 // Import Model Class User
 require('./models/User');
 
@@ -21,6 +26,22 @@ mongoose.connect(keys.mongoURI);
 
 // Express application
 const app = express(); 
+
+//Initialize Cookie Authentication 
+app.use(
+  cookieSession({
+      //Cookie expiration
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+      // encrypty cookie
+    keys: [keys.cookieKey]
+
+
+  })
+)
+
+// Initialize Passport to use Cookies for authentication
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Import AuthRoutes and call it with the app function., returns a function
 require('./routes/authRoutes')(app);

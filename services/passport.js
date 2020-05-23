@@ -64,7 +64,13 @@ passport.use(new GoogleStrategy({
 
 /*
 Passport Identification Token: 
-- We would use the serielise user function to generate the identifiying piece of info
+- We would use the serialise user function to generate the identifiying piece of info
 - Set-Cookie '    '
 - On client reques passport deserializes the user and accepts the user
+
+USE PASSPORT TO HANDLE COOKIES 
+- npm install --save cookie-session
+- import and initialize cookieSession in index.js file
+
+
 */
