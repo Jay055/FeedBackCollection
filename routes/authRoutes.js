@@ -18,18 +18,26 @@ module.exports = (app) => {
     );
 
 
-    // On permisson resolve to the profile 
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    // On permisson resolve to the profile, passport acts as a middle ware 
+    app.get
+    ('/auth/google/callback',
+     passport.authenticate('google'),
+     (req, res) => {
+       res.redirect('/surveys');
+     }
+     );
+
+
 
       // get request to return user 
       app.get('/api/current_user', (req, res) => {
         res.send(req.user);
       })
 
-      // Logout User
+      // Logout User, this method  refreshes the entire page (deletes cookie)
       app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send(req.user)
+        res.redirect('/');
       })
 
 
