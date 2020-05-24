@@ -13,4 +13,5 @@ module.exports = function (app) {
 
 
 
-// Modern way to  Set Up Proxy: install http-proxy-middleware  
+// Modern way to   Set Up Proxy: install http-proxy-middleware  
+// Gets for /api and /auth/google
