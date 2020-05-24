@@ -89,6 +89,26 @@ CREATE NEW KEYS FOR PRODUCTION
 Heroko config vars. 
 
 
+SERVER SIDE 
+We do not run react and express on the same server because react already has an optimal inbuilt server. 
+
+
+CREATE REACT APP and install concurrently 
+
+ROUTING from react localhost to our server local host.
+Add the route from client to google Oauth consent. 
+
+
+
+
+
+CORS REQUEST : Cross Origin  Request (the driver assumes you are trying to do something malicious )
+That's why we use the proxy for the browser to assume it's the same port. 
+
+
+
+
+
 
 "engines": {
     "node": "10.16.3",

@@ -44,32 +44,29 @@ passport.use(
   proxy: true
   
 },
-  (accessToken, refreshToken, profile, done) =>{
-    // Avoid duplicate registration
-    // Whenever we use our data base we are intiating an Async function. 
-    User.findOne({ googleId: profile.id })
-    .then(existingUser=>{
+  async (accessToken, refreshToken, profile, done) =>{
+   
+    const  existingUser = await User.findOne({ googleId: profile.id })
+    
       if(existingUser){
-        // we already have a record with the given profile ID
-        // done(error object, userObject)
-         done(null, existingUser);
-      } else {
+       
+        return  done(null, existingUser);
+      } 
         // No user found with ID, make a new ID 
-        new User({ googleId: profile.id})
-        .save()
-          .then(user => done(null, user));
-      }
-    })
-
+        const user = await new User({ googleId: profile.id})
+        .save();
+           done(null, user);
+  
+    }
+    ));
+    
 
 
 
   //  Create a new user with the Model Class. ProfileId is gotten from access token. Create profile after Oauthentication
   //   console.log('profile:', profile);
    
-    }
-));
-
+ 
 
 
 
