@@ -7,3 +7,10 @@ module.exports = function (app) {
     })
   );
 };
+
+
+
+
+
+
+// Modern way to  Set Up Proxy: install http-proxy-middleware  
