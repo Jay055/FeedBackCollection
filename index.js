@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 // Import Model Class User
 require('./models/User');
 require('./services/passport');
+require('./models/Survey')
 // The order of the require statement matters in Mongodb, we have to get the data first before using. 
 
 
@@ -58,6 +59,7 @@ app.use(passport.session());
 // Import AuthRoutes and call it with the app function., returns a function
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 
 // SetUp express Server for Production mode 
