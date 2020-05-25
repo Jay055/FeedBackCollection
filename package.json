@@ -29,6 +29,7 @@
     "node": "^14.2.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
+    "sendgrid": "^5.2.3",
     "stable": "^0.1.8",
     "stripe": "^8.55.0"
   },
