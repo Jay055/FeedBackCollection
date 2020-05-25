@@ -21,4 +21,4 @@ const surveySchema = new Schema ({
 
 
 // Model class = surveys 
-mongoose.model('surverys', surveySchema)
+mongoose.model('surveys', surveySchema)
