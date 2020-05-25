@@ -20,7 +20,13 @@ module.exports = app => {
       source: req.body.id
     })
     
-    console.log(charge);
+    // credit current user with 5 credits after charge 
+    req.user.credits +=5 ; 
+    const user =  await req.user.save();
+
+      // respond with the user 
+    res.send(user)
+
 
   })
 }
