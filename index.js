@@ -60,6 +60,20 @@ require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
 
+// SetUp express Server for Production mode 
+if (process.env.NODE_ENV === 'production') {
+  // Express will serve up production assets (main.js, main.css), routes we don't know we search first or all in client/build 
+  app.use(express.static('client/build'));
+
+  // Express will serve up the index.html file if it doesn't locate the route,
+  const path = require('path'); 
+  app.get('*', (req, res)=> {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+
+
+}
+
 
 
 

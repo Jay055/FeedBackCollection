@@ -60,3 +60,13 @@ export const fetchUser = () => {
 export const fetchUser = () => async dispatch => { 
       const res = await axios.get('/api/current_user')
            dispatch({ type: FETCH_USER, payload: res})}
+
+
+
+// CHECK for Authentication 
+app.post('/api/stripe', async (req, res) => {
+      
+            if(!req.user) {
+              return res.status(401).send({error: 'You must log in'})
+            }
+        

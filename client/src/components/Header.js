@@ -14,6 +14,7 @@ class Header extends Component {
       default:
         return (<Fragment>
            <li> <Payment/> </li>
+           <li>Credits: {this.props.auth.credits}</li>
         <li><a href='/api/logout'>Logout</a></li>
          
         
