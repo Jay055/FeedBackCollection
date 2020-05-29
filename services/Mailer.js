@@ -15,7 +15,7 @@ class Mailer extends helper.Mail {
     super();
  // helper.Email/body (from sendGrid library correctly format)
     this.sgApi = sendgrid(keys.sendGridApiKey);
-    this.from_email = new helper.Email('uchman055@gmail.com');
+    this.from_email = new helper.Email(keys.email);
     this.subject = subject;
     this.body = new helper.Content('text/html', content);
     this.recipients = this.formatAddresses(recipients);
@@ -53,13 +53,13 @@ class Mailer extends helper.Mail {
   }
 
   async send() {
-    const request = this.sgApi.emptyRequest({
+    const request =  this.sgApi.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
       body: this.toJSON()
     });
 
-    const response = this.sgApi.API(request);
+    const response =  await this.sgApi.API(request);
     
     return response;
   }
