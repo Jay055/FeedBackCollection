@@ -1,6 +1,6 @@
 // Body Template of the email 
 // survey model 
-module.export = (survey) => { 
+module.exports = (survey) => { 
   return '<div>' + survey.body + '</div>';
 };
 

@@ -70,3 +70,10 @@ app.post('/api/stripe', async (req, res) => {
               return res.status(401).send({error: 'You must log in'})
             }
         
+
+
+
+const survey = {title: 'my title', subject: 'my subject', recipients: 'myportfolio2022@gmail.com', body: 'theres the body'}
+
+
+

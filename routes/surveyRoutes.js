@@ -29,6 +29,8 @@ module.exports = app => {
       //Create new Mailer Class wit the survey and email template(body of the email, surveyTemplate.js)
       
       const mailer = new Mailer(survey, surveyTemplate(survey)); 
+      mailer.send(); 
+      
 
 
    });

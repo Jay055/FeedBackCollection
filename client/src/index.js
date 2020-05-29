@@ -8,6 +8,10 @@ import reduxThunk from 'redux-thunk';
 import './components/App.css';
 import App from './components/App';
 
+// test back end route 
+import axios from 'axios';
+window.axios = axios;
+
 // Set up Redux Store 
 const store =  createStore(reducers, {}, applyMiddleware(reduxThunk))
 
@@ -19,6 +23,3 @@ const store =  createStore(reducers, {}, applyMiddleware(reduxThunk))
 // Nest App to Provider (store)
 ReactDOM.render(
 <Provider store={store}><App /> </Provider>, document.querySelector('#root'));
-
-console.log(process.env.REACT_APP_STRIPE_KEY);
-console.log(process.env.NODE_ENV);
