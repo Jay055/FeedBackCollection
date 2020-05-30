@@ -91,3 +91,28 @@ const survey = {title: 'my title', subject: 'my subject', recipients: 'myportfol
       // </div>
     // )
   // }
+
+
+  const {map, filter, uniqWith, compose} = require('lodash/fp');
+ 
+router.post('/api/surveys/webhooks', (req, res) => {
+ const extract = ({email, url}) => {
+    const match = new Path('/api/surveys/:surveyId/:choice').test(new URL(url).pathname);
+    return match ? {email, surveyId: match.surveyId, choice: match.choice} : null;
+ };
+  
+ const events = compose(
+    uniqWith((i, j) => (i.email === j.email) && (i.surveyId === j.surveyId)),
+    filter(val => val),
+    map(extract)
+ )(req.body || []);
+  
+ console.log(events);
+ res.send({});
+});
+
+
+
+const arr =[1,2,3]
+arr.map(a=>a*2).map(b=>b*3).reverse()
+_.chain(arr).map(c=>c*6).reverse()

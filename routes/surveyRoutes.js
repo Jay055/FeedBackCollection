@@ -1,4 +1,10 @@
 // Create and send mail 
+// import lodash helper 
+const _ = require('lodash');
+
+const {Path} = require('path-parser');
+  // integrated with node 
+const { URL } = require('url');
 
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
@@ -19,10 +25,31 @@ module.exports = app => {
   });
 
 
+
+    // Webhooks, extract data from URL 
   app.post('/api/surveys/webhooks', (req, res)=>{
-    console.log(req.body);
+    const events = req.body.map(event => {
+  //  const events = _.map(req.body, event => {
+    const pathname =  new URL(event.url).pathname; 
+    const p = new Path('/api/surveys/:surveyId/:choice');
+    const match = p.test(pathname);
+    if(match) {
+      return { email: event.email, surveyId: match.surveyId, choice: match.choice}; 
+    }
+    });
+    // Remove undefined elements with Lodash 
+    const compactEvents = _.compact(events);
+      //Save unique records with lodash 
+    const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
+
+    console.log(uniqueEvents)
     res.send({})
+
   })
+
+
+
+  // 
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => { 
     const { title, subject, body, recipients } = req.body;
