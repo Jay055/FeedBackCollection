@@ -5,6 +5,7 @@ import React , { Component } from 'react';
 import { reduxForm, Field}  from 'redux-form';
 import SurveyField from './SurveyField';
 import { Link } from  'react-router-dom';
+import validateEmails from '../utils/validateEmails';
 
 
 class SurveyForm extends Component { 
@@ -45,6 +46,29 @@ class SurveyForm extends Component {
   }
 }
 
+const validate = (values) => {
+  const errors = {};
+
+    // if we have no emails, give the validate function an empty string to avoid undefined errors 
+  errors.Recipient = validateEmails(values.Recipient || '')
+
+  if (!values.title){
+    errors.title = 'You must provide a title '
+  } if (!values.Subject) {
+    errors.Subject = 'You must provide a subject'
+  } if (!values.Email){
+    errors.Email = 'You must provide an email body'
+  }  if(!values.Recipient){
+    errors.Recipient = 'You must provide recipients emails'
+  }
+
+  return errors ;
+ 
+
+}
+
+
 export default reduxForm({
+  validate,
   form: 'surveyForm'
 })(SurveyForm);

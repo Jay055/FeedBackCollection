@@ -24,7 +24,7 @@ class Header extends Component {
   }
  
   render() {
-    const auth= this.props.auth
+   
     
     return (
           <nav>
