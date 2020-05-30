@@ -6,24 +6,34 @@ import { reduxForm, Field}  from 'redux-form';
 import SurveyField from './SurveyField';
 import { Link } from  'react-router-dom';
 import validateEmails from '../utils/validateEmails';
+import formFields from './formField';
 
 
 class SurveyForm extends Component { 
+
+
+  
+  
   renderFields(){
-    return (
-      <div>
-        <Field type="text" name="title" label="Survey Title" component={SurveyField} /> 
-        <Field type="text" name="Subject" label="Subject Line" component={SurveyField} /> 
-        <Field type="text" name="Email" label="Email Body" component={SurveyField} /> 
-        <Field type="text" name="Recipient" label="Recipient List" component={SurveyField} /> 
+  
+    
+  return formFields.map(field=> {
+    return(
+      <div key={field.name}> 
+        <Field type="text" name= {field.name}
+        label={field.label} component={SurveyField} />
       </div>
     )
-  }
+  })}
+
+   
 
   render(){ 
+
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(values=> { console.log(values)})}
+        <form 
+        onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}
         >
           {this.renderFields()}
 
@@ -47,28 +57,27 @@ class SurveyForm extends Component {
 }
 
 const validate = (values) => {
+  // console.log(values);
   const errors = {};
 
     // if we have no emails, give the validate function an empty string to avoid undefined errors 
-  errors.Recipient = validateEmails(values.Recipient || '')
+  errors.recipients = validateEmails(values.recipients || '')
 
-  if (!values.title){
-    errors.title = 'You must provide a title '
-  } if (!values.Subject) {
-    errors.Subject = 'You must provide a subject'
-  } if (!values.Email){
-    errors.Email = 'You must provide an email body'
-  }  if(!values.Recipient){
-    errors.Recipient = 'You must provide recipients emails'
-  }
+  formFields.forEach(({required, name }) => {
+    if(required && !values[name]) {
+      errors[name] = `${name} is required`
+    }
+  })
+
 
   return errors ;
  
 
 }
 
-
+// destroyOnUnmount false keeps the form values for reviewing, surveyform names the form in the reducer 
 export default reduxForm({
   validate,
-  form: 'surveyForm'
+  form: 'surveyForm',
+  destroyOnUnmount: false
 })(SurveyForm);

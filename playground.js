@@ -77,3 +77,17 @@ const survey = {title: 'my title', subject: 'my subject', recipients: 'myportfol
 
 
 
+
+
+
+ // return (
+      // <div>
+        
+
+        {/* <Field type="text" name="title" label="Survey Title" component={SurveyField} /> 
+        <Field type="text" name="Subject" label="Subject Line" component={SurveyField} /> 
+        <Field type="text" name="Email" label="Email Body" component={SurveyField} /> 
+        <Field type="text" name="Recipient" label="Recipient List" component={SurveyField} />  */}
+      // </div>
+    // )
+  // }
