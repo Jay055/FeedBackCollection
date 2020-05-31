@@ -8,6 +8,11 @@ const Landing = () => {
       Feedback!
     </h1>
     Collect feedback form your users
+
+    
+
+
+
   </div>
 );
 };
