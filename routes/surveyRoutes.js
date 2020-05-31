@@ -28,10 +28,11 @@ module.exports = app => {
 
     // Webhooks, extract data from URL 
   app.post('/api/surveys/webhooks', (req, res)=>{
-    const events = req.body.map(event => {
-  //  const events = _.map(req.body, event => {
-    const pathname =  new URL(event.url).pathname; 
     const p = new Path('/api/surveys/:surveyId/:choice');
+    const events = req.body.map(event => {
+ 
+    const pathname =  new URL(event.url).pathname; 
+   
     const match = p.test(pathname);
     if(match) {
       return { email: event.email, surveyId: match.surveyId, choice: match.choice}; 
@@ -41,15 +42,29 @@ module.exports = app => {
     const compactEvents = _.compact(events);
       //Save unique records with lodash 
     const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
+    uniqueEvents.forEach(({ surveyId, email, choice }) => {
+          // update database with mongoDB queries   
+      Survey.updateOne(
+              {
+                _id: surveyId,
+                recipients: {
+                  $elemMatch: { email: email, responded: false }
+                }
+              },
+              {
+                $inc: { [choice]: 1 },
+                $set: { 'recipients.$.responded': true }
+              }
+            ).exec();
+          })
+          
+          console.log(events)
+        res.send({});
+      });
 
-    console.log(uniqueEvents)
-    res.send({})
+  // //
 
-  })
-
-
-
-  // 
+  // // 
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => { 
     const { title, subject, body, recipients } = req.body;

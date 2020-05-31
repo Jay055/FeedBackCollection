@@ -116,3 +116,34 @@ router.post('/api/surveys/webhooks', (req, res) => {
 const arr =[1,2,3]
 arr.map(a=>a*2).map(b=>b*3).reverse()
 _.chain(arr).map(c=>c*6).reverse()
+
+  // app.post('/api/surveys/webhooks', (req, res) => {
+  //   const p = new Path('/api/surveys/:surveyId/:choice');
+
+  //  const events =  _.chain(req.body)
+  //     .map(({ email, url }) => {
+  //       const match = p.test(new URL(url).pathname);
+  //       if (match) {
+  //         return { email, surveyId: match.surveyId, choice: match.choice };
+  //       }
+  //     })
+  //     .compact()
+  //     .uniqBy('email', 'surveyId')
+  //     .each(({ surveyId, email, choice }) => {
+  //       Survey.updateOne(
+  //         {
+  //           _id: surveyId,
+  //           recipients: {
+  //             $elemMatch: { email: email, responded: false }
+  //           }
+  //         },
+  //         {
+  //           $inc: { [choice]: 1 },
+  //           $set: { 'recipients.$.responded': true }
+  //         }
+  //       ).exec();
+  //     })
+  //     .value();
+  //     console.log(events)
+  //   res.send({});
+  // });
