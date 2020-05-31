@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 
+
 // Mailer for mailing 
 const Mailer = require('../services/Mailer');
 // Get Survey Template 
@@ -18,9 +19,15 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys');
 
 module.exports = app => { 
+//Get surveys from a particular user 
+app.get('/api/surveys', requireLogin, async (req, res)=> {
+  const surveys = await Survey.find({ _user: req.user.id})
+    .select({ recipients: false }) // Do not load entire recipents to avoid lots of memory fetching
+  res.send(surveys);
+})
 
     // After voting thanks 
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('We appreciate your feedback. Thank you.');
   });
 
@@ -53,7 +60,8 @@ module.exports = app => {
               },
               {
                 $inc: { [choice]: 1 },
-                $set: { 'recipients.$.responded': true }
+                $set: { 'recipients.$.responded': true },
+                lastResponded: new Date()
               }
             ).exec();
           })
