@@ -8,7 +8,7 @@
  background-color:#499AE9;
  
  border-radius: 4px;
- margin:
+ 
 }
 
 .headerbtn {
@@ -21,9 +21,6 @@
   margin-top: 5rem;
 }
 
-.left {
-  /* margin-left:1rem; */
-}
 
 .white {
   color: white;
