@@ -26,19 +26,21 @@ const reviewFields = formFields.map(({label, name }) => {
   
   return (
     <div> 
-    
-    <h5> Please confirm your entries </h5>
+  
+    <h4> Please confirm your entries </h4>
       <div>
        {reviewFields}
       </div>
       <button
-      className="blue darken-3 btn-flat"
-      onClick={()=> onCancel()}
+      className="red btn-flat center white-text"
+      onClick={()=> 
+      
+        onCancel()}
       >
       Back to Review
       </button>
       <button
-      className="green darken-3 right btn-flat"
+      className="blue btn-flat right white-text"
           // submitSurvey from action values
       onClick={()=> submitSurvey(formValues, history)}
       >

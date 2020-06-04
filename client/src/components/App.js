@@ -9,6 +9,12 @@ import SurveyNew from './surveys/SurveyNew';
 
 
 
+import '../assets/css/style.css';
+import '../assets/css/custom.css';
+import '../assets/css/settings.css';
+
+
+
 // 
 class App extends Component {
   componentDidMount() {
@@ -20,13 +26,17 @@ class App extends Component {
       return (
        
           <BrowserRouter>
-            <div className="container">
+            <div>
               <Header />
+              <div className= "container">
+
               <Route exact path="/" component={Landing} />
               <Route exact path="/surveys" component={Dashboard} />
               <Route path="/surveys/new" component={SurveyNew} />
-              
+              </div>
+           
             </div>
+
           </BrowserRouter>
         
       );

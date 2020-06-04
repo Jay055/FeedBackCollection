@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './components/reducers';
 import reduxThunk from 'redux-thunk';
-import './components/App.css';
+
 import App from './components/App';
 
 // test back end route 

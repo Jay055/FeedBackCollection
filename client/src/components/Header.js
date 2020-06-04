@@ -2,6 +2,7 @@ import React, { Component, Fragment  } from 'react';
 import { connect } from 'react-redux';
 import  { Link } from 'react-router-dom';
 import Payment from './Payments';
+import './Header.css';
 
 
 class Header extends Component {
@@ -10,12 +11,12 @@ class Header extends Component {
       case null:
         return;
       case false:
-        return <li><a href='/auth/google'>Login with Google</a></li>
+        return <li><a className="black-text text-lighten-4 "href='/auth/google'>Login with Google</a ></li>
       default:
         return (<Fragment>
            <li> <Payment/> </li>
-           <li>Credits: {this.props.auth.credits}</li>
-        <li><a href='/api/logout'>Logout</a></li>
+           <li className="black-text text-lighten-4 " style={{margin: '0 10px'}}> Credits: {this.props.auth.credits}</li>
+        <li><a className="black-text text-lighten-4 " href='/api/logout'>Logout</a></li>
          
         
         </Fragment>
@@ -27,12 +28,12 @@ class Header extends Component {
    
     
     return (
-          <nav>
+          <nav className="white">
 
-            <div className="nav-wrapper">
+            <div className="nav-wrapper black-text">
               <Link
                to={this.props.auth? '/surveys' : '/' } 
-              className="left brand-logo">Feedback</Link>
+              className=" black-text left brand-logo">Inputly</Link>
               <ul className="right">
                 {this.renderContent()}
                

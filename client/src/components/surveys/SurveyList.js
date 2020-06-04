@@ -1,6 +1,10 @@
 import React, { Component } from 'react'; 
 import { connect } from 'react-redux'; 
 import  { fetchSurveys }  from '../actions';
+import './SurveyList.css';
+
+// Display with Pie Chart 
+import ReactSvgPieChart from 'react-svg-piechart';
 
 
 
@@ -9,12 +13,23 @@ class SurveyList extends Component {
     this.props.fetchSurveys()
   }
 
+  
   renderSurveys() {
     return this.props.surveys.map(survey => {
+      console.log(survey.yes)
+      console.log(survey.no)
+      console.log(survey)
+
+      const data = [
+        {title: "yes", value: survey.yes, color: "#C13C37"},
+        {title: "no", value: survey.no, color: "#EFB413"},
+        
+      ]
+  
       return (
         <div className="card darken-1" key={survey._id}>
           <div className="card-content">
-            <span className="card-title">{survey.title}</span>
+            <span className="card-title">Title: {survey.title}</span>
             <p>
               {survey.body}
             </p>
@@ -23,8 +38,23 @@ class SurveyList extends Component {
             </p>
           </div>
           <div className="card-action">
-            <a>Yes: {survey.yes}</a>
-            <a>No: {survey.no}</a>
+          <span style={{color: "#C13C37" }}>Yes: {survey.yes} </span>
+          <br /> 
+            <span style={{ color: "#EFB413"}}> No: {survey.no}</span>
+
+            <div className= "piechartdisplay">
+
+            {survey.yes  > 0 &&
+       
+          <ReactSvgPieChart data={data} />
+                                        
+            
+            }
+                         
+
+            </div>
+
+            
           </div>
         </div>
       );
